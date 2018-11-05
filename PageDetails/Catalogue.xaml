@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="FoodTruck.PageDetails.Catalogue"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FoodTruck.PageDetails"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Quel type de repas souhaitez vous commander? " Margin="20"></TextBlock>
+            <ListView Name="AffichageTypeRepas" ItemsSource="{Binding listeRepas}"  
+        SelectionMode="Single"         
+        IsItemClickEnabled="True"
+          ItemClick="ListView_TypeRepasClick">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch"></ItemsWrapGrid>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Name="AffichageItemTypeRepas" Text="{Binding RepasType}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel  Name="monComboxJour"  Visibility="Collapsed">
+            <TextBlock Text="Veuillez choisir votre jour de commande" Margin="20"></TextBlock>
+
+                <ComboBox Name="comboxAJour"  ItemsSource="{Binding listeJour }"   Height="44" Width="296" DisplayMemberPath="DisponibiliteJour" SelectionChanged="comboxAJour_SelectionChanged"   />
+            </StackPanel>
+
+            <ListView Visibility="Collapsed" Name="AffichageProduitSelonTypeChoisi"
+                  ItemsSource="{Binding NosProduit}"
+                  SelectionMode="Single"  
+                  RelativePanel.Below="FilterBox"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.IsVerticalRailEnabled="True"
+                  ScrollViewer.VerticalScrollMode="Enabled"
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.IsHorizontalRailEnabled="True"
+                  Margin="20">
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="10 0 10 0" Width="50"/>
+                            <TextBlock Text="Nom" Width="300" />
+                            <TextBlock Text="Description" Width="300" />
+                            <TextBlock Text="Prix" Width="100" />
+                            <TextBlock Width="150" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="photEncoursDelecture.jpg" Width="40" Height="40" HorizontalAlignment="Left" Margin="10"/>
+                            <TextBlock Name="Nom" Text="{Binding ProductNom}" Width="300" TextWrapping="Wrap" VerticalAlignment="Center" />
+                            <TextBlock Name="Description" Text="{Binding ProductDescription}" Width="300" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                            <TextBlock Name="Prix" Text="{Binding ProductPrix}" Width="100" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                            <Button Content="Ajouter au panier" Click="ListView_ProduitClick" CommandParameter="{Binding ElementName=Nom, Path=Text}" Width="150" VerticalAlignment="Center" IsEnabled="{Binding isEnable}"/>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="FoodTruck.PageDetails.Compte"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FoodTruck.PageDetails"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" >
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Margin="40 30 40 60" Name="Connexion">
+
+                    <TextBlock Text="Vous êtes déja client" FontSize="20" Margin="30"/>
+
+                    <TextBlock Text="Login:"/>
+                    <TextBox Name="Login_test" Text="{Binding Client.Login, Mode=TwoWay}"></TextBox>
+                    <TextBlock Text="Mot de passe:"/>
+                    <PasswordBox Name="Mdp_test"></PasswordBox>
+                    <Button Content="Valider" Click ="Mdp_HashConnexion"  CommandParameter="{Binding ElementName=Login_test, Path=Text}"/>
+                    <!--<Button Content="Valider" Click ="Mdp_HashConnexion" Command="{Binding ValiderConnexion}" CommandParameter="{Binding ElementName=Login_test, Path=Text}"/>-->
+
+
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="40 15 40 100" Name="inscription">
+                    <TextBlock Text="Vous n'êtes pas encore client" FontSize="20" Margin="30"/>
+
+                    <TextBlock Text="Type de Compte"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Particulier" GroupName="Type" Checked="HandleCheckCompte"></RadioButton>
+                        <RadioButton Content="Entreprise" GroupName="Type" Checked="HandleCheckCompte"></RadioButton>
+                    </StackPanel>
+
+                    <TextBlock Text="Civilité"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Homme" GroupName="Civilite" Checked="HandleCheckCivilite"></RadioButton>
+                        <RadioButton Content="Femme" GroupName="Civilite" Checked="HandleCheckCivilite"></RadioButton>
+                    </StackPanel>
+
+                    <TextBlock Text="Nom"/>
+                    <TextBox Name="choix_nom" Text="{Binding Client.Nom , Mode=TwoWay}"/>
+
+                    <TextBlock Text="Prénom"/>
+                    <TextBox Name="choix_prenom" Text="{Binding Client.Prenom, Mode=TwoWay}"/>
+
+                    <TextBlock Text="Date de naissance"/>
+                    <DatePicker Name="choix_dateNaissance" Date="{Binding Client.DateDeNaissance, Mode=TwoWay}" />
+
+                    <TextBlock Text="Adresse" Margin="0 10 0 0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+
+                        <StackPanel Orientation="Vertical" Margin="0 0 10 0">
+                            <TextBlock Text="Numéro" Width="100"/>
+                            <TextBox Name="choix_numero" Text="{Binding Client.Numero, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                            <TextBlock Text="Voie" Width="200"/>
+                            <TextBox Name="choix_voie" Text="{Binding Client.Voie, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                            <TextBlock Text="Code postal" Width="100"/>
+                            <TextBox Name="choix_codePostale" Text="{Binding Client.CodePostal, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                            <TextBlock Text="Ville"/>
+                            <TextBox Name="choix_ville" Text="{Binding Client.Ville, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+
+                    <TextBlock Text="E-mail"/>
+                    <TextBox Name="choix_email" Text="{Binding Client.Email, Mode=TwoWay}"/>
+
+                    <TextBlock Text="Login:"/>
+                    <TextBox Name="choix_Login" Text="{Binding Client.Login, Mode=TwoWay}"/>
+                    <TextBlock Text="Mot de passe:"/>
+                    <PasswordBox Name="choix_Mdp_test"></PasswordBox>
+                    <TextBlock Text="Vérification de votre mot de passe:"/>
+                    <PasswordBox Name="choix_Mdp_test_verif"></PasswordBox>
+
+                    <Button Content="Valider" Click="Mdp_HashInscription" CommandParameter="{Binding Client, Mode=TwoWay}"/>
+                    <!--<Button Content="Valider" Click="Mdp_HashInscription" Command="{Binding ValiderInscription}" CommandParameter="{Binding Client}"/>-->
+
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+
+    </Grid>
+</Page>
